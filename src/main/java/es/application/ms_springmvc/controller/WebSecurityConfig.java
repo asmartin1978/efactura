@@ -1,0 +1,47 @@
+package es.application.ms_springmvc.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        
+    	http.authorizeRequests().antMatchers("/webjars/**").permitAll();
+    	
+    	http
+            .authorizeRequests()
+                .antMatchers("/", "/home" ).hasAnyRole("USER")
+                .antMatchers("/static/**").permitAll()
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+				.antMatchers("/user/**").hasAnyRole("USER")
+				.anyRequest().authenticated()
+                .and()
+            .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+            .logout().clearAuthentication(true)
+                .permitAll()
+                ;
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER")
+                .and()
+                .withUser("admin").password("password").roles("ADMIN" , "USER");
+    }
+    
+
+    
+}
