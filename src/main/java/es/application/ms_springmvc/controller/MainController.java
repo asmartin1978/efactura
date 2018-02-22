@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import es.application.ms_springmvc.service.FacturaService;
 
-
 @Controller
 public class MainController  {
 
-	
 	@Autowired
 	FacturaService factura;
 	
@@ -31,9 +29,10 @@ public class MainController  {
         return "login";
     }
 	
-	@GetMapping("/admin")
-    public String admin() {
-        return "/admin";
+	
+	@GetMapping("/usuario")
+    public String usuario() {
+        return "/usuario";
     }
 		
 	@GetMapping("/403")

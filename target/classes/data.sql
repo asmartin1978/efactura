@@ -17,9 +17,17 @@ insert into "FACTURA" (id ,concepto , importe , numeroserie ,numerofactura , nif
 insert into "FACTURA" (id ,concepto , importe , numeroserie ,numerofactura , nifemisor , nombreemisor , nifreceptor , nombrereceptor,  numaries, numface ,puntoentrada, numregistrocontable , estado ,fechapresentacion , fechaemision , solanulacion) values (17 ,'Factura 17 de prueba', 1500 , '00017' , 'FACT-17' , '48816258T' , 'el emisor' , '00000000T' , 'el receptor' , 'AR00001' , 'FAC00001' , 'PUEF' , '00001' , 'RECIBIDA' , sysdate , sysdate , 'NO');
 
 
+--Creacion de los usuarios de prueba
+insert into "USUARIO" (username, id, nombre, apellidos, mail , password) values ('SMA',1,'Alfonso' , 'Sanchez Martin' , 'asmartin@ayesa.com' , '$2a$10$RyY4bXtV3LKkDCutlUTYDOKd2AiJYZGp4Y7MPVdLzWzT1RX.JRZyG');
+insert into "USUARIO" (username, id, nombre, apellidos, mail , password) values ('VJD',2,'Jesus' , 'Viruez Dominguez' , 'jviruez@ayesa.com' , '$2a$10$RyY4bXtV3LKkDCutlUTYDOKd2AiJYZGp4Y7MPVdLzWzT1RX.JRZyG');
 
+insert into "ROL" (id, codigo, descripcion) values (1, 'ROLE_USER' , 'Usuario Gestor');
+insert into "ROL" (id, codigo, descripcion) values (2, 'ROLE_ADMIN' , 'Usuario Administrador');
 
-
+insert into "USER_X_ROLES" (fk_usu , fk_rol) values (1,1); 
+insert into "USER_X_ROLES" (fk_usu , fk_rol) values (2,1);
+insert into "USER_X_ROLES" (fk_usu , fk_rol) values (1,2);
+insert into "USER_X_ROLES" (fk_usu , fk_rol) values (2,2);
 
 
 

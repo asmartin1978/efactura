@@ -8,22 +8,113 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container">
-
-    <div class="starter-template">
-        <h1>Admin page (Spring Security protected)</h1>
-
-        <h1 th:inline="text">Hello <span sec:authentication="name"/></h1>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-
-    </div>
-
+<div class="container-fluid">
+        
+        
+        <div class="panel panel-primary">
+		  <div class="panel-heading">
+    			<h3 class="panel-title">Gestion de usuarios del sistema</h3>
+  		  </div>
+		  <div class="panel-body">
+		    		
+		    		<table id="table_usuarios" class="compact">
+			        <thead>
+					        	<tr>
+							        <th>ID usuario</th>
+							        <th>Nombre</th>
+							        <th>Apellidos</th>
+							        <th>email</th>							        							        
+							        <th>opciones</th>
+							     </tr>
+					     </thead>
+					     <tbody>   
+						        <tr th:each="usuario : ${usuarios}">
+								        <td th:text="${usuario.username}"></td>
+								        <td th:text="${usuario.nombre}"></td>
+								        <td th:text="${usuario.apellidos}"></td>
+								        <td th:text="${usuario.mail}"></td>
+								        <td> 
+								        	<button type="button" class="btn btn-primary" th:onclick="|openmodal('${usuario.username}')|">
+		    									Editar
+		  									</button>
+		  								</td>
+							    </tr>
+					     </tbody>
+		  
+					</table>
+				<button type="button" class="btn btn-primary" th:onclick="'javascript:openmodalnewuser()'">
+		    			Alta de nuevo usuario
+		  		</button>
+		  		
+		  		<div id="myModalHolder">
+		  		</div>
+		  			
+		  			  		    			    		
+		  </div>
+		</div>
+        
 </div>
 <!-- /.container -->
 
 <div th:replace="fragments/footer :: footer"/>
+
+<script type="text/javascript">
+
+			function openmodal(usuario){
+				
+				$.ajax({
+					url: "/administrador/usuario/" + usuario ,
+					success: function(data){
+						$("#myModalHolder").html(data);
+						$("#myModal").modal('show');
+					}
+				});			
+			}
+			
+			function openmodalnewuser(){
+				
+				$.ajax({
+					url: "/administrador/usuario/"  ,
+					success: function(data){
+						$("#myModalHolder").html(data);
+						$("#myModal").modal('show');
+					}
+				});			
+			}
+
+			$(document).ready( function () {
+				
+			    $('#table_usuarios').DataTable( {
+		            "language": {
+		            	"sProcessing":     "Procesando...",
+		                "sLengthMenu":     "Mostrar _MENU_ registros",
+		                "sZeroRecords":    "No se encontraron resultados",
+		                "sEmptyTable":     "Ningún dato disponible en esta tabla",
+		                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+		                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+		                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+		                "sInfoPostFix":    "",
+		                "sSearch":         "Filtrar los resultados:",
+		                "sUrl":            "",
+		                "sInfoThousands":  ",",
+		                "sLoadingRecords": "Cargando...",
+		                "oPaginate": {
+		                    "sFirst":    "Primero",
+		                    "sLast":     "Último",
+		                    "sNext":     "Siguiente",
+		                    "sPrevious": "Anterior"
+		                },
+		                "oAria": {
+		                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+		                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+		                }
+		            }
+			    }
+			    );
+			    
+			} );
+
+		</script>
 
 </body>
 </html>
