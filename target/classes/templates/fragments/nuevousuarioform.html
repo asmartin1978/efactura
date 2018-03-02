@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+<!-- The Modal -->
+		  <div id="myModal">
+		    <div class="modal-dialog modal-lg">
+		      <div class="modal-content">
+		      
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h4 class="modal-title">Alta de nuevo usuario</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        
+		        <!-- Modal body -->
+		        <div class="modal-body">		          
+		          	<form id="userForm"  th:object="${userForm}" >
+		          	
+		          		
+		          		<div class="form-group">
+							    <label for="username">Identificador de usuario:</label>
+							    <input type="text" class="form-control" th:field="*{username}"  placeholder="Introduzca un identificador de usuario"/>
+							    <p class="label label-danger"  th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+					 	</div>
+
+				    	
+				    	<div class="form-group">
+							    <label for="nombre">Nombre</label>
+							    <input type="text" class="form-control" th:field="*{nombre}"  placeholder="Introduzca un nombre de usuario"/>
+							    <p class="label label-danger"  th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
+					 	</div>
+					 	
+					 	<div class="form-group">
+							    <label for="apellidos">Apellidos</label>
+							    <input type="text" class="form-control" th:field="*{apellidos}"  placeholder="Introduzca los apellidos del usuario"/>
+							    <p class="label label-danger"  th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></p>
+					 	</div>
+					 	
+					 	<div class="form-group">
+							    <label for="mail">Correo electrónico</label>
+							    <input type="text" class="form-control" th:field="*{mail}"  placeholder="Introduzca una dirección de correo"/>
+							    <p class="label label-danger"  th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></p>
+					 	</div>
+				    	
+				    	<div class="form-group">
+							    <label for="password">Contraseña</label>
+							    <input type="text" class="form-control" th:field="*{password}"  placeholder="Contraseña"/>
+							    <p class="label label-danger"  th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+					 	</div>
+				    	<div class="form-group">
+				    		
+				    		<button type="button" onclick="postformulario()"  class="btn btn-primary">Crear usuario</button>
+				    	</div>
+				        
+				    </form>		         
+		        </div>
+		        		        
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		        </div>
+		        
+		      </div>
+		    </div>
+		  </div>		  
+		 
+		 <script type="text/javascript">
+			 function postformulario(){
+				 console.log($("#userForm").serialize());
+				 $.post( "/administrador/usuario", $("#userForm").serialize() , function(data){
+					 	$("#myModal").html(data);
+					 }
+				 )
+				 				 
+			 }		 
+		 </script>
+		 
+		 
+		  
+</body>
+</html>		  

@@ -13,21 +13,21 @@
 		      
 		        <!-- Modal Header -->
 		        <div class="modal-header">
-		          <h4 class="modal-title">Alta de nuevo usuario</h4>
+		          <h4 class="modal-title">Edicion de los datos del usuario</h4>
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
 		        </div>
 		        
 		        <!-- Modal body -->
 		        <div class="modal-body">
 		          
-		          	<form id="nusform" onclick="enviar();" th:object="${userForm}" >
-				    	<p>Identificador de usuario: <input type="text" th:field="*{username}" /></p>
+		          	<form action="#" th:action="@{/administrador/usuario/}+${username}" th:object="${userForm}" method="post">
+				    	<p>Identificador de usuario: <input readonly="true" type="text" th:field="*{username}" /></p>
 				    	<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</td>
 				        <p>Nombre: <input type="text" th:field="*{nombre}" /></p>
 				        <p>Apellidos: <input type="text" th:field="*{apellidos}" /></p>
 				        <p>Correo: <input type="text" th:field="*{mail}" /></p>
 				        <p>Contraseña: <input type="password" th:field="*{password}" /></p>
-				        <p><input id="elboton" type="button" value="button" /></p>
+				        <p><input type="submit" value="Submit" /></p>
 				    </form>
 		         
 		        </div>
@@ -41,22 +41,6 @@
 		    </div>
 		  </div>
 		  
-
-<script type="text/javascript">
-
-function enviar(){
-	 $.ajax({
-	        url: '/administrador/usuario',
-	        type: 'post',
-	        success: function(data) {
-	                   console.log(data);
-	                 }
-	    });
-}
-
-			
-</script>
-
 
 </body>
 </html>		  
