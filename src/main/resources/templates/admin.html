@@ -8,7 +8,7 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container-fluid">
+<div class="container">
         
         
         <div class="panel panel-primary">
@@ -34,7 +34,7 @@
 								        <td th:text="${usuario.apellidos}"></td>
 								        <td th:text="${usuario.mail}"></td>
 								        <td> 
-								        	<button type="button" class="btn btn-primary">
+								        	<button type="button" class="btn btn-primary" th:onclick="'javascript:openmodaledituser(\'' + ${usuario.username} + '\');'">
 		    									Editar
 		  									</button>
 		  								</td>
@@ -62,6 +62,13 @@
 
 			function openmodalnewuser(){
 				$("#myModalHolder").load('/administrador/usuario', function(){
+					$("#myModalHolder").modal('show');
+				});
+							
+			}
+			
+			function openmodaledituser(usuario){
+				$("#myModalHolder").load('/administrador/usuario/' + usuario , function(){
 					$("#myModalHolder").modal('show');
 				});
 							

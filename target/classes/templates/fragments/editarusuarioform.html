@@ -11,25 +11,20 @@
 		      
 		        <!-- Modal Header -->
 		        <div class="modal-header">
-		          <h4 class="modal-title" th:if="${!edicion}" >Alta de nuevo usuario</h4>
-		          <h4 class="modal-title" th:if="${edicion}" >Edicion de los datos del usuario</h4>
+		          <h4 class="modal-title">Alta de nuevo usuario</h4>
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
 		        </div>
 		        
 		        <!-- Modal body -->
 		        <div class="modal-body">		          
 		          	<form id="userForm"  th:object="${userForm}" >
-		          		    		          		    
-		          		<h2 th:if="${edicion}"></h2>    		          		          		
+		          		          		
 		          		<div class="form-group">
 							    <label for="username">Identificador de usuario:</label>
-							    <input th:if="${!edicion}" type="text" class="form-control" th:field="*{username}"  placeholder="Introduzca un identificador de usuario"/>
-							    <span th:if="${edicion}" class="form-control-static" th:text="${username}" />
-							    <input th:if="${edicion}" type="hidden" class="form-control" th:field="*{username}"  />
+							    <input type="text" class="form-control" th:field="*{username}"  placeholder="Introduzca un identificador de usuario"/>
 							    <p class="label label-danger"  th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 					 	</div>
-
-				    	
+					 				    	
 				    	<div class="form-group">
 							    <label for="nombre">Nombre</label>
 							    <input type="text" class="form-control" th:field="*{nombre}"  placeholder="Introduzca un nombre de usuario"/>
@@ -48,14 +43,13 @@
 							    <p class="label label-danger"  th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></p>
 					 	</div>
 				    	
-				    	<div th:if="${!edicion}" class="form-group">
+				    	<div class="form-group">
 							    <label for="password">Contraseña</label>
 							    <input type="password" class="form-control" th:field="*{password}"  placeholder="Contraseña"/>
 							    <p class="label label-danger"  th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 					 	</div>
 				    	<div class="form-group">			    		
-				    		<button type="button" th:if="${!edicion}" onclick="crearusuario()"  class="btn btn-primary">Crear usuario</button>
-				    		<button type="button" th:if="${edicion}" onclick="actualizarusuario()"  th:onclick="'javascript:actualizarusuario(\'' + ${username} + '\');'"   class="btn btn-primary">Actualizar usuario</button>
+				    		<button type="button" onclick="postformulario()"  class="btn btn-primary">Crear usuario</button>
 				    	</div>
 				        
 				    </form>		         
@@ -63,29 +57,20 @@
 		        		        
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button  type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 		        </div>
 		        
 		      </div>
 		    </div>
 		  </div>		  
 		 
-		 <script th:if="${!edicion}" type="text/javascript">
-			 function crearusuario(){
-				 $.post( "/administrador/usuario", $("#userForm").serialize() , function(data){
+		 <script type="text/javascript">
+			 function postformulario(){
+				 $.post( "/administrador/usuario/" +  ${usuario.username} , $("#userForm").serialize() , function(data){
 					 	$("#myModal").html(data);
 					 }
 				 )				 				 
-			 }
-		 
-		</script>	 
-		<script th:if="${edicion}" type="text/javascript">
-			 function actualizarusuario(usuario){
-				 $.post( "/administrador/usuario/" + usuario, $("#userForm").serialize() , function(data){
-					 	$("#myModal").html(data);
-					 }
-				 )				 				 
-			 }
+			 }		 
 		 </script>		  
 </body>
 </html>		  

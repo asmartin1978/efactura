@@ -52,5 +52,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     private Usuario DtoToEntity(UsuarioDTO usu){
     	return modelMapper.map(usu, Usuario.class);
     }
+    
+	@Override
+	public void update(UsuarioDTO user) {
+		//solo actualizo si existe, y ademas no deja tocar la password con este metodo
+		Usuario theEntity = userRepository.findByUsername(user.getUsername());
+		//TODO: Hacer esto con modelmapper
+		theEntity.setMail(user.getMail());
+		theEntity.setApellidos(user.getApellidos());
+		theEntity.setNombre(user.getNombre());	
+		userRepository.save(theEntity);
+	}
        
 }

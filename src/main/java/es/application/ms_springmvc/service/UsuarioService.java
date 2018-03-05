@@ -10,4 +10,6 @@ public interface UsuarioService {
 	void save(UsuarioDTO user);
     UsuarioDTO findByUsername(String username);
     public List<UsuarioDTO> findAllUsers();
+    void update(UsuarioDTO user);
+    
 }

@@ -1,6 +1,7 @@
 package es.application.ms_springmvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import es.application.ms_springmvc.controller.validators.NewUserValidator;
 import es.application.ms_springmvc.controller.validators.UserValidator;
 import es.application.ms_springmvc.model.dto.UsuarioDTO;
 import es.application.ms_springmvc.service.UsuarioService;
@@ -22,7 +24,12 @@ public class AdminController {
 
 	
 	@Autowired
+	@Qualifier("UserValidator")
 	UserValidator uservalidator;
+	
+	@Autowired
+	@Qualifier("NewUserValidator")
+	NewUserValidator newuservalidator;
 	
 	@Autowired
 	UsuarioService usuarioservice;
@@ -39,6 +46,8 @@ public class AdminController {
 		
 		UsuarioDTO us = new UsuarioDTO();
 		model.addAttribute("userForm" , us);
+		//Se incluye una variable en el modelo para que la vista muestre el formulario de ALTA de nuevo usuario
+		model.addAttribute("edicion", false);
         return "fragments/nuevousuarioform";
     }
 	
@@ -47,7 +56,9 @@ public class AdminController {
 		
 		UsuarioDTO us = usuarioservice.findByUsername(username);
 		model.addAttribute("userForm" , us);
-        return "admin :: editarusuarioform";
+		//Se incluye una variable en el modelo para que la vista muestre el formulario de EDICION de nuevo usuario
+		model.addAttribute("edicion", true);
+        return "fragments/nuevousuarioform";
     }
 	
 	
@@ -59,12 +70,13 @@ public class AdminController {
 		
 		//Si hay errores -> Se informa
 		if(bindingResult.hasErrors()){
-			return "/admin";
+			model.addAttribute("edicion", true);
+			return "fragments/nuevousuarioform";
 		}
 		//Si no hay errores -> Se guarda el usuario y se recarga la lista
-		usuarioservice.save(userForm);
-		model.addAttribute("usuarios" , usuarioservice.findAllUsers());
-		return "/admin";
+		usuarioservice.update(userForm);
+		model.addAttribute("mensaje" , "El usuario ha sido editado correctamente");
+		return "/fragments/resultinmodal";
     }
 	
 	
@@ -72,14 +84,14 @@ public class AdminController {
 	public String altaUsuario(@ModelAttribute("userForm") UsuarioDTO userForm, BindingResult bindingResult , Model model){
 		
 		//Validacion
-		uservalidator.validate(userForm, bindingResult);	
+		newuservalidator.validate(userForm, bindingResult);	
 		//Si hay errores -> Se informa
-		if(bindingResult.hasErrors()){		
-			return "/fragments/nuevousuarioform";
+		if(bindingResult.hasErrors()){
+			model.addAttribute("edicion", false);
+			return "fragments/nuevousuarioform";
 		}
 		//Si no hay errores -> Se guarda el usuario y se recarga la lista
 		usuarioservice.save(userForm);
-		model.addAttribute("usuarios" , usuarioservice.findAllUsers());
 		model.addAttribute("mensaje" , "El usuario ha sido creado con exito");
 		return "/fragments/resultinmodal";
 	}

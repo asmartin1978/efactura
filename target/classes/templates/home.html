@@ -9,67 +9,116 @@
     <body>
     	<div th:replace="fragments/header :: header"/>
   
-    	<div class="container-fluid">
-        	    
-        	    <div class="panel panel-primary">
-				  <div class="panel-heading">
-		    			<h3 class="panel-title">Lista de facturas</h3>
-		  		  </div>
-				  <div class="panel-body">      
-        	
-					        <table id="table_id" class="compact">
-					        <thead>
-							        	<tr>
-									        <th>Fecha de presentacion</th>
-									        <th>Fecha de emision</th>
-									        <th>Numero de serie</th>
-									        <th>Numero factura</th>
-									        <th>Concepto</th>
-									        <th>Nif del emisor</th>
-									        <th>Nombre del emisor</th>
-									        <th>Importe</th>
-									        <th>Numero Aries</th>
-									        <th>Numero FACE</th>
-									        <th>Punto de entrada</th>
-									        <th>Numero de registro contable</th>
-									        <th>Estado</th>
-									        <th>Solicitud de anulacion</th>							        
-									     </tr>
-							     </thead>
-							     <tbody>   
-								        <tr th:each="factura : ${facturas}">
-										        <td th:text="${factura.fechapresentacion}"></td>
-										        <td th:text="${factura.fechaemision}"></td>
-										        <td th:text="${factura.numeroserie}"></td>
-										        <td th:text="${factura.numerofactura}"></td>
-										        <td th:text="${factura.concepto}"></td>
-										        <td th:text="${factura.nifemisor}"></td>
-										        <td th:text="${factura.nombreemisor}"></td>
-										        <td th:text="${factura.importe}"></td>
-										        <td th:text="${factura.numaries}"></td>
-										        <td th:text="${factura.numface}"></td>
-										        <td th:text="${factura.puntoentrada}"></td>
-										        <td th:text="${factura.numregistrocontable}"></td>
-										        <td th:text="${factura.estado}"></td>
-										        <td th:text="${factura.solanulacion}"></td>
-										        
-									    </tr>
-							     </tbody>
-		    
-							</table>
-			        
-			        	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-		    						Alta de factura en formato papel
-		  				</button>
-		  				<div th:replace="fragments/facturaform :: facturaform"/>
-			        
-			        
-			        </div>
-			        </div>
-     	
+     	<div class="container-fluid">
+    
+				  <div class="row">
+				    <div class="col-sm-2" style="background-color:lavender;">
+
+								<form>
+								  <div class="form-group">
+								    <label for="exampleInputEmail1">Numero de factura</label>
+								    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Numero de factura"/>								    
+								  </div>
+								  <div class="form-group">
+								    <label for="exampleInputEmail1">Numero de serie</label>
+								    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Numero de serie"/>								    
+								  </div>
+								  <div class="form-group">
+								    <label for="exampleInputEmail1">NIF del emisor</label>
+								    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="NIF del emisor"/>								    
+								  </div>
+								  <div class="form-group">
+								    <label for="exampleInputEmail1">Nombre del emisor</label>
+								    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre del emisor"/>								    
+								  </div>
+								  <div class="form-group">
+								    <label for="exampleInputEmail1">Numero de registro contable</label>
+								    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Numero de registro contable"/>								    
+								  </div>
+								  <div class="form-group">
+								    <label for="exampleInputEmail1">Numero de registro @ries</label>
+								    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Numero de registro @ries"/>								    
+								  </div>
+								  <div class="form-group">
+								    <label for="exampleInputEmail1">Numero de registro FACE</label>
+								    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Numero de registro FACE"/>
+								  </div>
+								  
+								  
+								  
+								  <button type="submit" class="btn btn-primary">Buscar</button>
+								  <button type="submit" class="btn btn-primary">Limpiar filtro de busqueda</button>
+								</form>
+								
+								
+								
+
+
+					</div>
+				    
+				    <div class="col-sm-10" style="background-color:lavender;">
+				    
+							  <div class="panel panel-primary">
+								  <div class="panel-heading">
+						    			<h3 class="panel-title">Lista de facturas</h3>
+						  		  </div>
+							  	<div class="panel-body">      
+			        	
+								        <table id="table_id" class="compact">
+								        <thead>
+										        	<tr>
+												        <th>Fecha de presentacion</th>
+												        <th>Fecha de emision</th>
+												        <th>Numero de serie</th>
+												        <th>Numero factura</th>
+												        <th>Concepto</th>
+												        <th>Nif del emisor</th>
+												        <th>Nombre del emisor</th>
+												        <th>Importe</th>
+												        <th>Numero Aries</th>
+												        <th>Numero FACE</th>
+												        <th>Punto de entrada</th>
+												        <th>Numero de registro contable</th>
+												        <th>Estado</th>
+												        <th>Solicitud de anulacion</th>							        
+												     </tr>
+										     </thead>
+										     <tbody>   
+											        <tr th:each="factura : ${facturas}">
+													        <td th:text="${factura.fechapresentacion}"></td>
+													        <td th:text="${factura.fechaemision}"></td>
+													        <td th:text="${factura.numeroserie}"></td>
+													        <td th:text="${factura.numerofactura}"></td>
+													        <td th:text="${factura.concepto}"></td>
+													        <td th:text="${factura.nifemisor}"></td>
+													        <td th:text="${factura.nombreemisor}"></td>
+													        <td th:text="${factura.importe}"></td>
+													        <td th:text="${factura.numaries}"></td>
+													        <td th:text="${factura.numface}"></td>
+													        <td th:text="${factura.puntoentrada}"></td>
+													        <td th:text="${factura.numregistrocontable}"></td>
+													        <td th:text="${factura.estado}"></td>
+													        <td th:text="${factura.solanulacion}"></td>
+													        
+												    </tr>
+										     </tbody>
+					    
+										</table>
+						        
+							        	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+						    						Alta de factura en formato papel
+						  				</button>
+						  				
+					  				<div th:replace="fragments/facturaform :: facturaform"/>
+						        	</div>
+						        </div>
+							    
+							    </div>
+				  </div>     	
         </div>
                             
-       <div th:replace="fragments/footer :: footer"/>      
+       <div th:replace="fragments/footer :: footer"/>
+             
        <script type="text/javascript">
 			$(document).ready( function () {
 			    $('#table_id').DataTable( {
