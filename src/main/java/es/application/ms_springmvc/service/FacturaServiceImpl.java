@@ -33,5 +33,20 @@ public class FacturaServiceImpl implements FacturaService {
 		FacturaDTO facturaDto = modelMapper.map(f, FacturaDTO.class);
 	    return facturaDto;
 	}
+
+	@Override
+	public List<FacturaDTO> buscaFacturas(FacturaDTO dto) {
+		List<Factura> lista =  (List<Factura>) repository.buscadorFactura(
+									dto.getConcepto(), 
+									dto.getNifemisor(), 
+									dto.getNumaries(), 
+									dto.getNumface());
+		
+		List<FacturaDTO> listaDto = lista.stream()
+				.map(factdto -> convertToDto(factdto))
+				.collect(Collectors.toList());
+		
+		return listaDto;
+	}
 		
 }

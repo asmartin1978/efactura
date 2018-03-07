@@ -7,4 +7,7 @@ public interface FacturaService {
 
 	public java.util.List<FacturaDTO> getAllFacturas();
 	
+	
+	public java.util.List<FacturaDTO> buscaFacturas(FacturaDTO dto);
+	
 }
