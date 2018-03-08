@@ -26,12 +26,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         
     	http.authorizeRequests().antMatchers("/webjars/**").permitAll();
+    	http.authorizeRequests().antMatchers("/css/**").permitAll();
+    	http.authorizeRequests().antMatchers("/images/**").permitAll();
     	
     	http.csrf().disable()
             .authorizeRequests()
                 .antMatchers("/", "/home" , "/usuario" ).hasAnyRole("USER" , "ADMIN")
             	.antMatchers("/administrador/**").hasRole("ADMIN")
-                .antMatchers("/static/**").permitAll()
 				.anyRequest().authenticated()
                 .and()
             .formLogin()

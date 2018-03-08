@@ -8,13 +8,15 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container">
+<div class="container-fluid">
         
-        
+        <button type="button" onclick="openmodalnewuser()" class="btn btn-success navbar-btn">
+       				 <i class="glyphicon glyphicon-user"></i>
+        				Alta de nuevo usuario
+    	</button>
+           
         <div class="panel panel-primary">
-		  <div class="panel-heading">
-    			<h3 class="panel-title">Gestion de usuarios del sistema</h3>
-  		  </div>
+		 
 		  <div class="panel-body">
 		    		
 		    		<table id="table_usuarios" class="compact">
@@ -34,7 +36,7 @@
 								        <td th:text="${usuario.apellidos}"></td>
 								        <td th:text="${usuario.mail}"></td>
 								        <td> 
-								        	<button type="button" class="btn btn-primary" th:onclick="'javascript:openmodaledituser(\'' + ${usuario.username} + '\');'">
+								        	<button type="button" class="btn btn-success" th:onclick="'javascript:openmodaledituser(\'' + ${usuario.username} + '\');'">
 		    									Editar
 		  									</button>
 		  								</td>
@@ -42,9 +44,7 @@
 					     </tbody>
 		  
 					</table>
-				<button type="button" class="btn btn-primary" onclick="openmodalnewuser()">
-		    			Alta de nuevo usuario
-		  		</button>
+				
 		  		
 		  		<div id="myModalHolder" class="modal fade">	  		
 		  		</div>

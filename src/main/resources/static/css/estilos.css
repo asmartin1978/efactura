@@ -1,16 +1,28 @@
+.navbar {
+  min-height: 60px;
+  margin-bottom: 0px;
+}
+
+.navbar-default {
+    background-color: #fff;
+    border-color: #cbd4d8;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #337ab7;
+    font-weight: 700;
+}
+
+
 .navbar-inverse {
-    background-color: #337ab7;
-    border-color: #337ab7;
+    background-color: #fff;
+    /*border-color: ##fff;*/
 }
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
     color: #fff;
-    background-color: #337ab7;
+    background-color: #fff;
 }
-
-
-
-
 
 .wrapper {
     display: flex;
@@ -18,13 +30,13 @@
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
+    min-width: 350px;
+    max-width: 350px;
     min-height: 100vh;
 }
 
 #sidebar.active {
-    margin-left: -250px;
+    margin-left: -350px;
 }
 
 
@@ -49,7 +61,7 @@ a[aria-expanded="true"]::before {
 
 @media (max-width: 768px) {
     #sidebar {
-        margin-left: -250px;
+        margin-left: -350px;
     }
     #sidebar.active {
         margin-left: 0;
@@ -83,19 +95,19 @@ a, a:hover, a:focus {
 
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
-    background: #337ab7;
-    color: #fff;
+    background: #fff;
+    color: #337ab7;
     transition: all 0.3s;
 }
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #337ab7;
+    background: #fff;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #fff;
 }
 
 #sidebar ul p {
@@ -109,22 +121,39 @@ a, a:hover, a:focus {
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #337ab7;
+    color: #fff;
     background: #fff;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #337ab7;
+    background: #fff;
 }
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #337ab7;
+    background: #fff;
 }
 
 
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
 
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}
 
 
 

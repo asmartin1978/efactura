@@ -14,7 +14,10 @@ public interface FacturaRepository extends PagingAndSortingRepository<Factura, L
 	List<Factura> findByConceptoContainingAndNifemisorContainingAndNumariesContainingAndNumfaceContaining (String concepto,String nifemisor , String numaries, String numface);
 	
 	
-	@Query("select f from Factura f where f.concepto like %?1% AND f.nifemisor like %?2% and f.numaries like %?3% and f.numface like %?4%")
+	@Query("select f from Factura f where f.concepto like %?1% "
+								    + "AND f.nifemisor like %?2% "
+								    + "AND f.numaries like %?3% "
+								    + "AND f.numface like %?4% "  )
 	List<Factura> buscadorFactura(String concepto,String nifemisor , String numaries, String numface);
 	
 }
